@@ -4,6 +4,17 @@
 	{
 		"properties" : 
 		{
+			"normalize" : 
+			{
+				"fraction" : false,
+				"index" : 0,
+				"max" : 100,
+				"min" : 1,
+				"order" : 100,
+				"text" : "Normalize",
+				"type" : "slider",
+				"value" : 20
+			},
 			"schemecolor" : 
 			{
 				"order" : 0,
@@ -15,5 +26,6 @@
 		"supportsaudioprocessing" : true
 	},
 	"title" : "Simple audio visualizer",
-	"type" : "Web"
+	"type" : "web",
+	"version" : 0
 }
