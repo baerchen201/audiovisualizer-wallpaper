@@ -1,18 +1,14 @@
+const LEVELS = 128,
+  DEV_FPS = 30;
+
 const DEV = !Object.keys(window).includes("wallpaperGetUtilities");
 
-console.log(DEV ? "Development environment" : "Wallpaper environment");
-
-class AudioBar extends HTMLElement {
-  on() {
-    this.classList.add("on");
-  }
-  off() {
-    this.classList.remove("on");
-  }
-}
-customElements.define("audio-bar", AudioBar);
+console.info(DEV ? "Development environment" : "Wallpaper environment");
 
 class AudioColumn extends HTMLElement {
+  // @ts-ignore
+  children: HTMLCollectionOf<HTMLSpanElement>;
+
   constructor() {
     super();
     document.body.appendChild(this);
@@ -20,39 +16,37 @@ class AudioColumn extends HTMLElement {
   connectedCallback() {
     this.innerHTML = "";
 
-    for (let bar_id = 0; bar_id < 128; bar_id++) {
-      const bar = new AudioBar();
-      this.appendChild(bar);
+    for (let i = LEVELS; i > 0; i--) {
+      this.appendChild(document.createElement("span"));
     }
   }
 
-  set value(value: number) {
-    for (let i = 0; i < this.children.length; i++) {
-      const element: AudioBar = this.children[i] as AudioBar;
-      if (value <= i / 128) element.off();
-      else element.on();
-    }
+  set level(level: number) {
+    Array.from(this.children).forEach((e: HTMLSpanElement, i: number) => {
+      if (level <= i / LEVELS) e.classList.remove("on");
+      else e.classList.add("on");
+    });
   }
 }
 customElements.define("audio-column", AudioColumn);
 
 const audio_columns: AudioColumn[] = [];
-for (let column_id = 0; column_id < 64; column_id++) {
+for (let i = 0; i < Math.floor(LEVELS / 2); i++) {
   audio_columns.unshift(new AudioColumn());
 }
-for (let column_id = 0; column_id < 64; column_id++) {
+for (let i = 0; i < Math.ceil(LEVELS / 2); i++) {
   audio_columns.push(new AudioColumn());
 }
 
 function update(audio_data: number[]) {
-  audio_data.forEach((volume: number, index: number) => {
-    audio_columns[index].value = volume;
+  audio_data.forEach((level: number, i: number) => {
+    audio_columns[i].level = level;
   });
 }
 
 if (DEV) {
   const values: number[] = [];
-  let offset: number = 128;
+  let offset: number = LEVELS;
   for (let i = 0; i < 128; i++) {
     values.push(Math.sin(i / 8) * 0.25);
   }
@@ -65,6 +59,6 @@ if (DEV) {
 
       return _;
     })(),
-    1e3 / 30
+    1e3 / DEV_FPS
   );
 } else (window as any).wallpaperRegisterAudioListener(update);

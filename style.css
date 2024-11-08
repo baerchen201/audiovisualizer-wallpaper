@@ -18,11 +18,11 @@ audio-column {
   gap: 3px;
 }
 
-audio-bar {
+audio-column > span {
   height: 100%;
   width: 100%;
 }
 
-audio-bar.on {
+audio-column > span.on {
   background: #fff;
 }
