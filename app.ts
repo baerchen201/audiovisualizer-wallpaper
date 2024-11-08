@@ -45,24 +45,26 @@ for (let column_id = 0; column_id < 64; column_id++) {
 }
 
 function update(audio_data: number[]) {
-  console.log(audio_data);
   audio_data.forEach((volume: number, index: number) => {
     audio_columns[index].value = volume;
   });
 }
 
-if (DEV)
+if (DEV) {
+  const values: number[] = [];
+  let offset: number = 128;
+  for (let i = 0; i < 128; i++) {
+    values.push(Math.sin(i / 8) * 0.25);
+  }
   setInterval(
     (function _() {
-      let rand_data = [];
-      while (rand_data.length < 128) {
-        rand_data.push(Math.random());
-      }
-
-      update(rand_data);
+      update(values);
+      values.unshift(Math.sin(offset / 8) * 0.25);
+      offset++;
+      values.pop();
 
       return _;
     })(),
-    500
+    1e3 / 30
   );
-else (window as any).wallpaperRegisterAudioListener(update);
+} else (window as any).wallpaperRegisterAudioListener(update);
