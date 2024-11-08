@@ -37,7 +37,10 @@ class AudioColumn extends HTMLElement {
 customElements.define("audio-column", AudioColumn);
 
 const audio_columns: AudioColumn[] = [];
-for (let column_id = 0; column_id < 128; column_id++) {
+for (let column_id = 0; column_id < 64; column_id++) {
+  audio_columns.unshift(new AudioColumn());
+}
+for (let column_id = 0; column_id < 64; column_id++) {
   audio_columns.push(new AudioColumn());
 }
 
