@@ -1,0 +1,28 @@
+body {
+  position: fixed;
+  inset: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+
+  padding: 8px;
+  gap: 8px;
+  background: #000;
+}
+
+audio-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 3px;
+}
+
+audio-bar {
+  height: 100%;
+  width: 100%;
+}
+
+audio-bar.on {
+  background: #fff;
+}
