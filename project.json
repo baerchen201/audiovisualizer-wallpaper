@@ -1,4 +1,6 @@
 {
+	"contentrating" : "Everyone",
+	"description" : "half-assed badly coded audio visualizer",
 	"file" : "index.html",
 	"general" : 
 	{
@@ -33,7 +35,11 @@
 		},
 		"supportsaudioprocessing" : true
 	},
+	"preview" : "image.jpg",
+	"ratingsex" : "none",
+	"ratingviolence" : "none",
+	"tags" : [ "Music" ],
 	"title" : "Simple audio visualizer",
-	"type" : "web",
+	"type" : "Web",
 	"version" : 0
 }
