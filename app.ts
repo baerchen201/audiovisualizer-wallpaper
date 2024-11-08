@@ -65,10 +65,19 @@ if (DEV) {
   );
 } else (window as any).wallpaperRegisterAudioListener(update);
 
+let styles: HTMLStyleElement = document.createElement("style");
+document.body.appendChild(styles);
 (window as any).wallpaperPropertyListener = {
   applyUserProperties: function (properties: any) {
     document.body.classList.remove("dev");
 
     if (properties.normalize) NORMALIZE = properties.normalize.value;
+    if (properties.color)
+      styles.innerHTML = `body{--color:rgb(${(properties.color.value as string)
+        .split(" ")
+        .map((v) => {
+          return Math.round(Number(v) * 255);
+        })
+        .join(",")})}`;
   },
 };

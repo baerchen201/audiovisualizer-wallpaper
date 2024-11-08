@@ -8,6 +8,8 @@ body {
   padding: 8px;
   gap: 8px;
   background: #000;
+
+  --color: #fff;
 }
 
 audio-column {
@@ -24,7 +26,7 @@ audio-column > span {
 }
 
 audio-column > span.on {
-  background: #fff;
+  background: var(--color);
 }
 
 #dev {
