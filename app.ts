@@ -4,6 +4,7 @@ const LEVELS = 128,
 const DEV = !Object.keys(window).includes("wallpaperGetUtilities");
 
 console.info(DEV ? "Development environment" : "Wallpaper environment");
+if (DEV) document.body.classList.add("dev");
 
 class AudioColumn extends HTMLElement {
   // @ts-ignore

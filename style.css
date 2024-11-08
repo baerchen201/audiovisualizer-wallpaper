@@ -26,3 +26,30 @@ audio-column > span {
 audio-column > span.on {
   background: #fff;
 }
+
+#dev {
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  text-align: right;
+  color: #fff;
+  opacity: 0.2;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  user-select: none;
+  transition: 100ms ease-out opacity;
+
+  display: none;
+}
+body.dev #dev {
+  display: initial;
+}
+#dev:hover {
+  opacity: 1;
+}
+#dev > *:last-child {
+  margin-bottom: 0;
+}
+#dev a {
+  color: #fff;
+}
