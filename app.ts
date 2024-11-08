@@ -29,8 +29,8 @@ class AudioColumn extends HTMLElement {
   set value(value: number) {
     for (let i = 0; i < this.children.length; i++) {
       const element: AudioBar = this.children[i] as AudioBar;
-      if (value <= i / 128) element.on();
-      else element.off();
+      if (value <= i / 128) element.off();
+      else element.on();
     }
   }
 }
